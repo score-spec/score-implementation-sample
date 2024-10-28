@@ -106,11 +106,6 @@ service:
     ports:
         web:
             port: 8080
-resources:
-    thing:
-        params:
-            x: example
-		type: something
 `, string(raw))
 
 	// check that state was persisted
