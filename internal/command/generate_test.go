@@ -106,6 +106,11 @@ service:
     ports:
         web:
             port: 8080
+resources:
+    thing:
+        params:
+            x: example
+		type: something
 `, string(raw))
 
 	// check that state was persisted
@@ -138,6 +143,11 @@ containers:
         - target: /somefile
           content: |
             ${metadata.name}
+resources:
+    thing:
+        type: something
+        params:
+          x: ${metadata.name}
 `), 0755))
 
 	_, _, err = executeAndResetCommand(context.Background(), rootCmd, []string{
@@ -161,5 +171,10 @@ containers:
             key: value
 metadata:
     name: example
+resources:
+    thing:
+        params:
+            x: example
+        type: something
 `, string(raw))
 }

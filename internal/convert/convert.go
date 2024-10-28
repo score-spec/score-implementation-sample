@@ -47,6 +47,17 @@ func Workload(currentState *state.State, workloadName string) (map[string]interf
 		containers[containerName] = container
 	}
 	spec.Containers = containers
+	resources := maps.Clone(spec.Resources)
+	for resName, res := range resources {
+		resUid := framework.NewResourceUid(workloadName, resName, res.Type, res.Class, res.Id)
+		resState, ok := currentState.Resources[resUid]
+		if !ok {
+			return nil, fmt.Errorf("workload '%s': resource '%s' (%s) is not primed", workloadName, resName, resUid)
+		}
+		res.Params = resState.Params
+		resources[resName] = res
+	}
+	spec.Resources = resources
 
 	// ===============================================================================
 	// TODO: HERE IS WHERE YOU MAY CONVERT THE WORKLOAD INTO YOUR TARGET MANIFEST TYPE
