@@ -6,7 +6,7 @@ toolchain go1.23.2
 
 require (
 	github.com/imdario/mergo v1.0.1
-	github.com/score-spec/score-go v1.8.3
+	github.com/score-spec/score-go v1.8.4
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.9.0
