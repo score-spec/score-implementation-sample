@@ -50,9 +50,9 @@ resources:
 
 And run:
 
-```
-go run ./ init
-go run ./ generate score.yaml
+```sh
+go run ./cmd/score-xyz init
+go run ./cmd/score-xyz generate score.yaml
 ```
 
 The output `manifests.yaml` contains the following which indicates:
