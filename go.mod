@@ -1,8 +1,6 @@
 module github.com/score-spec/score-implementation-sample
 
-go 1.23.0
-
-toolchain go1.23.2
+go 1.23.4
 
 require (
 	github.com/imdario/mergo v1.0.1
