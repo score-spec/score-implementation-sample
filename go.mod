@@ -3,7 +3,7 @@ module github.com/score-spec/score-implementation-sample
 go 1.24.1
 
 require (
-	github.com/imdario/mergo v1.0.1
+	dario.cat/mergo v1.0.1
 	github.com/score-spec/score-go v1.9.3
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.6
@@ -12,7 +12,6 @@ require (
 )
 
 require (
-	dario.cat/mergo v1.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
@@ -22,5 +21,3 @@ require (
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
-
-replace github.com/imdario/mergo => dario.cat/mergo v1.0.0
