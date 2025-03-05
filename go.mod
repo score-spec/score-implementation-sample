@@ -1,10 +1,11 @@
 module github.com/score-spec/score-implementation-sample
 
 go 1.23.4
+toolchain go1.24.1
 
 require (
 	github.com/imdario/mergo v1.0.1
-	github.com/score-spec/score-go v1.8.5
+	github.com/score-spec/score-go v1.9.3
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.6
 	github.com/stretchr/testify v1.10.0
