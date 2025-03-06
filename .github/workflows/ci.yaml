@@ -31,6 +31,6 @@ jobs:
             "VERSION=test"
       - name: Test docker image
         run: |
-          docker run --rm score-implementation-sample:test --version
+          docker run --rm score-implementation-sample:test --help
           docker run -v .:/score-implementation-sample --rm score-implementation-sample:test init
           cat score.yaml
