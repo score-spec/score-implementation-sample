@@ -16,3 +16,11 @@ updates:
       ci:
         patterns:
           - "*"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      ci:
+        patterns:
+          - "*"
