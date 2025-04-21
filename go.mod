@@ -1,6 +1,6 @@
 module github.com/score-spec/score-implementation-sample
 
-go 1.24.1
+go 1.24.2
 
 require (
 	dario.cat/mergo v1.0.1
