@@ -85,38 +85,38 @@ func convertContainerVariables(input scoretypes.ContainerVariables, sf func(stri
 	return outMap, nil
 }
 
-func convertContainerFiles(input []scoretypes.ContainerFilesElem, scoreFile *string, sf func(string) (string, error)) ([]scoretypes.ContainerFilesElem, error) {
-	outSlice := make([]scoretypes.ContainerFilesElem, 0, len(input))
-	for i, fileElem := range input {
+func convertContainerFiles(input map[string]scoretypes.ContainerFile, scoreFile *string, sf func(string) (string, error)) (map[string]scoretypes.ContainerFile, error) {
+	outSlice := make(map[string]scoretypes.ContainerFile, 0, len(input))
+	for target, file := range input {
 		var content string
-		if fileElem.Content != nil {
-			content = *fileElem.Content
-		} else if fileElem.Source != nil {
-			sourcePath := *fileElem.Source
+		if file.Content != nil {
+			content = *file.Content
+		} else if file.Source != nil {
+			sourcePath := *file.Source
 			if !filepath.IsAbs(sourcePath) && scoreFile != nil {
 				sourcePath = filepath.Join(filepath.Dir(*scoreFile), sourcePath)
 			}
 			if rawContent, err := os.ReadFile(sourcePath); err != nil {
-				return nil, fmt.Errorf("%d: source: failed to read file '%s': %w", i, sourcePath, err)
+				return nil, fmt.Errorf("%s: source: failed to read file '%s': %w", target, sourcePath, err)
 			} else {
 				content = string(rawContent)
 			}
 		} else {
-			return nil, fmt.Errorf("%d: missing 'content' or 'source'", i)
+			return nil, fmt.Errorf("%s: missing 'content' or 'source'", target)
 		}
 
 		var err error
-		if fileElem.NoExpand == nil || !*fileElem.NoExpand {
+		if file.NoExpand == nil || !*file.NoExpand {
 			content, err = framework.SubstituteString(string(content), sf)
 			if err != nil {
-				return nil, fmt.Errorf("%d: failed to substitute in content: %w", i, err)
+				return nil, fmt.Errorf("%s: failed to substitute in content: %w", target, err)
 			}
 		}
-		fileElem.Source = nil
-		fileElem.Content = &content
+		file.Source = nil
+		file.Content = &content
 		bTrue := true
-		fileElem.NoExpand = &bTrue
-		outSlice = append(outSlice, fileElem)
+		file.NoExpand = &bTrue
+		outSlice = append(outSlice, file)
 	}
 	return outSlice, nil
 }
