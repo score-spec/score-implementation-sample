@@ -156,10 +156,10 @@ apiVersion: score.dev/v1b1
 containers:
     main:
         files:
-            - content: |
-                example
-              noExpand: true
-              target: /somefile
+            /somefile:
+                content: |
+                    example
+                noExpand: true
         image: stefanprodan/podinfo
         variables:
             dynamic: example
