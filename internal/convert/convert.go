@@ -86,7 +86,7 @@ func convertContainerVariables(input scoretypes.ContainerVariables, sf func(stri
 }
 
 func convertContainerFiles(input map[string]scoretypes.ContainerFile, scoreFile *string, sf func(string) (string, error)) (map[string]scoretypes.ContainerFile, error) {
-	outSlice := make(map[string]scoretypes.ContainerFile, 0, len(input))
+	outSlice := make(map[string]scoretypes.ContainerFile, len(input))
 	for target, file := range input {
 		var content string
 		if file.Content != nil {
