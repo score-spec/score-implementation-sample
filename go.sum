@@ -24,8 +24,8 @@ github.com/rogpeppe/go-internal v1.12.0/go.mod h1:E+RYuTGaKKdloAfM02xzb0FW3Paa99
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/santhosh-tekuri/jsonschema/v5 v5.3.1 h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
 github.com/santhosh-tekuri/jsonschema/v5 v5.3.1/go.mod h1:uToXkOrWAZ6/Oc07xWQrPOhJotwFIyu2bBVN41fcDUY=
-github.com/score-spec/score-go v1.11.1 h1:Jxv/eQhgI7MIEEBCGWfrl6//SFq6izCJirjd38M+sSs=
-github.com/score-spec/score-go v1.11.1/go.mod h1:kO8jz79Z4oWj4xMj3FYuqs1GYXkww0htVU5meQb+OEU=
+github.com/score-spec/score-go v1.11.2 h1:c31U8/3IPpNPQSfgp+RcYSLGnNEyx+TgJdUDxqWALOo=
+github.com/score-spec/score-go v1.11.2/go.mod h1:iLzrULuLIAczX3uiYMylkFFR6YNPz2/ui187ddkxBMw=
 github.com/spf13/cobra v1.9.1 h1:CXSaggrXdbHK9CF+8ywj8Amf7PBRmPCOJugH954Nnlo=
 github.com/spf13/cobra v1.9.1/go.mod h1:nDyEzZ8ogv936Cinf6g1RU9MRY64Ir93oCnqb9wxYW0=
 github.com/spf13/pflag v1.0.6/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
