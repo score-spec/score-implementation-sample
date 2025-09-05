@@ -1,6 +1,6 @@
-# score-implementation-sample
+# `score-implementation-sample`
 
-This score-implementation-sample is a template repo for creating a new Score implementation following the conventions laid out in [Score Compose](https://github.com/score-spec/score-compose) and [Score K8s](https://github.com/score-spec/score-k8s).
+This `score-implementation-sample` is a template repo for creating a new Score implementation following the conventions laid out in [Score Compose](https://github.com/score-spec/score-compose) and [Score K8s](https://github.com/score-spec/score-k8s).
 
 This sample comes complete with:
 

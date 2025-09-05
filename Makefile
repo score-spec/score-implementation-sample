@@ -15,5 +15,22 @@ build:
 	go build ./cmd/score-implementation-sample/
 
 test:
-	go vet ./...    
+	go vet ./...
 	go test ./... -cover -race
+
+test-app: build
+	./score-implementation-sample --version
+	./score-implementation-sample init
+	cat score.yaml
+	./score-implementation-sample generate score.yaml
+	cat manifests.yaml
+
+build-container:
+	docker build -t score-implementation-sample:local .
+
+test-container: build-container
+	docker run --rm score-implementation-sample:local --version
+	docker run --rm -v .:/score-implementation-sample score-implementation-sample:local init
+	cat score.yaml
+	docker run --rm -v .:/score-implementation-sample score-implementation-sample:local generate score.yaml
+	cat manifests.yaml
