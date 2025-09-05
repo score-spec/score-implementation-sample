@@ -17,3 +17,18 @@ build:
 test:
 	go vet ./...    
 	go test ./... -cover -race
+
+test-app: build
+	./score-implementation-sample init
+	cat score.yaml
+	./score-implementation-sample generate score.yaml
+	cat manifests.yaml
+
+build-container:
+	docker build -t score-implementation-sample:local .
+
+test-container: build-container
+	docker run --rm -it -v .:/score-implementation-sample score-implementation-sample:local init
+	cat score.yaml
+	docker run --rm -it -v .:/score-implementation-sample score-implementation-sample:local generate score.yaml
+	cat manifests.yaml

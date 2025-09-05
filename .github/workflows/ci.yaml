@@ -29,8 +29,9 @@ jobs:
           tags: score-implementation-sample:test
           build-args: |
             "VERSION=test"
+      - name: Test app
+        run: |
+          make test-app
       - name: Test docker image
         run: |
-          docker run --rm score-implementation-sample:test --help
-          docker run -v .:/score-implementation-sample --rm score-implementation-sample:test init
-          cat score.yaml
+          make test-container
