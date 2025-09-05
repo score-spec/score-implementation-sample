@@ -28,7 +28,7 @@ build-container:
 	docker build -t score-implementation-sample:local .
 
 test-container: build-container
-	docker run --rm -it -v .:/score-implementation-sample score-implementation-sample:local init
+	docker run --rm -v .:/score-implementation-sample score-implementation-sample:local init
 	cat score.yaml
-	docker run --rm -it -v .:/score-implementation-sample score-implementation-sample:local generate score.yaml
+	docker run --rm -v .:/score-implementation-sample score-implementation-sample:local generate score.yaml
 	cat manifests.yaml
