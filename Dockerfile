@@ -1,4 +1,4 @@
-FROM golang:1.26rc2-alpine@sha256:e804069354d9d4425f787964a0c3341a46a7b143f04b3396f35767f166a601ec AS builder
+FROM golang:1.26rc3-alpine@sha256:7152fe51a980b6c03ee6afc3b8c9e0f5f4045105b9f6a871d7b69dd4b60db165 AS builder
 
 ARG VERSION
 
