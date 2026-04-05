@@ -16,6 +16,7 @@ build:
 
 test:
 	go vet ./...
+	go env -w GOTOOLCHAIN="$(shell go env GOVERSION)+auto"
 	go test ./... -cover -race
 
 test-app: build
