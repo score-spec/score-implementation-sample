@@ -115,7 +115,7 @@ var generateCmd = &cobra.Command{
 						slog.Info(fmt.Sprintf("Set container image for container '%s' to %s from --%s", containerName, v, generateCmdImageFlag))
 						workload.Containers[containerName] = container
 					} else {
-						return fmt.Errorf("failed to convert '%s' because container '%s' has no image and --image was not provided: %w", arg, containerName, err)
+						return fmt.Errorf("failed to convert '%s' because container '%s' has no image and --image was not provided", arg, containerName)
 					}
 				}
 			}
