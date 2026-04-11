@@ -98,14 +98,14 @@ func TestInitAndGenerate_with_sample(t *testing.T) {
 	assert.Equal(t, `---
 apiVersion: score.dev/v1b1
 containers:
-    main:
-        image: stefanprodan/podinfo
+  main:
+    image: stefanprodan/podinfo
 metadata:
-    name: example
+  name: example
 service:
-    ports:
-        web:
-            port: 8080
+  ports:
+    web:
+      port: 8080
 `, string(raw))
 
 	// check that state was persisted
@@ -154,22 +154,22 @@ resources:
 	assert.Equal(t, `---
 apiVersion: score.dev/v1b1
 containers:
-    main:
-        files:
-            /somefile:
-                content: |
-                    example
-                noExpand: true
-        image: stefanprodan/podinfo
-        variables:
-            dynamic: example
-            key: value
+  main:
+    files:
+      /somefile:
+        content: |
+          example
+        noExpand: true
+    image: stefanprodan/podinfo
+    variables:
+      dynamic: example
+      key: value
 metadata:
-    name: example
+  name: example
 resources:
-    thing:
-        params:
-            x: example
-        type: something
+  thing:
+    params:
+      x: example
+    type: something
 `, string(raw))
 }
