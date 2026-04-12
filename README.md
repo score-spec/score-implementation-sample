@@ -30,22 +30,22 @@ Write the following to `score.yaml`:
 ```yaml
 apiVersion: score.dev/v1b1
 metadata:
-    name: example
+  name: example
 containers:
-    main:
-        image: stefanprodan/podinfo
-        variables:
-            key: value
-            dynamic: ${metadata.name}
-        files:
-        - target: /somefile
-          content: |
-            ${metadata.name}
+  main:
+    image: stefanprodan/podinfo
+    variables:
+      key: value
+      dynamic: ${metadata.name}
+    files:
+      /somefile:
+        content: |
+          ${metadata.name}
 resources:
-    thing:
-        type: something
-        params:
-          x: ${metadata.name}
+  thing:
+    type: something
+    params:
+      x: ${metadata.name}
 ```
 
 And run:
@@ -63,23 +63,24 @@ The output `manifests.yaml` contains the following which indicates:
 ```yaml
 apiVersion: score.dev/v1b1
 metadata:
-    name: example
+  name: example
 containers:
-    main:
-        files:
-            - content: |
-                example
-              noExpand: true
-              target: /somefile
-        image: stefanprodan/podinfo
-        variables:
-            dynamic: example
-            key: value
+  main:
+    files:
+      /somefile:
+        content: |
+          example
+        noExpand: true
+        target: 
+    image: stefanprodan/podinfo
+    variables:
+      dynamic: example
+      key: value
 resources:
-    thing:
-        params:
-            x: example
-        type: something
+  thing:
+    params:
+      x: example
+    type: something
 ```
 
 ## A note on licensing
