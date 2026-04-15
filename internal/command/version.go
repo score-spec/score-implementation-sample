@@ -65,7 +65,7 @@ var versionCmd = &cobra.Command{
 
 		if noUpdateCheck, _ := cmd.Flags().GetBool(versionCmdFileNoUpdateCheck); !noUpdateCheck {
 			if newer, err := checkForNewerVersion(version.Version); err == nil && newer != "" {
-				fmt.Fprintf(cmd.OutOrStdout(), "\nA newer version is available: %s\nUpdate at: https://github.com/score-spec/score-implementation-sample/releases/tag/%s\n", newer, newer)
+				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "\nA newer version is available: %s\nUpdate at: https://github.com/score-spec/score-implementation-sample/releases/tag/%s\n", newer, newer)
 			}
 		}
 
@@ -82,7 +82,7 @@ func checkForNewerVersion(currentVersion string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("unexpected status from releases API: %s", resp.Status)
