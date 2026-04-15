@@ -20,8 +20,10 @@ import (
 	"github.com/score-spec/score-implementation-sample/internal/version"
 )
 
+var ScoreImplementationName = "score-implementation-sample"
+
 var rootCmd = &cobra.Command{
-	Use:           "score-implementation-sample",
+	Use:           ScoreImplementationName,
 	SilenceErrors: true,
 	CompletionOptions: cobra.CompletionOptions{
 		HiddenDefaultCmd: true,

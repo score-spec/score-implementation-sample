@@ -44,7 +44,7 @@ const (
 
 var generateCmd = &cobra.Command{
 	Use:   "generate",
-	Short: "Run the conversion from score file to output manifests",
+	Short: "Run the conversion from Score file to output manifests",
 	Args:  cobra.ArbitraryArgs,
 	CompletionOptions: cobra.CompletionOptions{
 		HiddenDefaultCmd: true,
@@ -62,16 +62,16 @@ var generateCmd = &cobra.Command{
 		currentState := &sd.State
 
 		if len(args) != 1 && (cmd.Flags().Lookup(generateCmdOverridesFileFlag).Changed || cmd.Flags().Lookup(generateCmdOverridePropertyFlag).Changed || cmd.Flags().Lookup(generateCmdImageFlag).Changed) {
-			return fmt.Errorf("cannot use --%s, --%s, or --%s when 0 or more than 1 score files are provided", generateCmdOverridePropertyFlag, generateCmdOverridesFileFlag, generateCmdImageFlag)
+			return fmt.Errorf("cannot use --%s, --%s, or --%s when 0 or more than 1 Score files are provided", generateCmdOverridePropertyFlag, generateCmdOverridesFileFlag, generateCmdImageFlag)
 		}
 
 		slices.Sort(args)
 		for _, arg := range args {
 			var rawWorkload map[string]interface{}
 			if raw, err := os.ReadFile(arg); err != nil {
-				return fmt.Errorf("failed to read input score file: %s: %w", arg, err)
+				return fmt.Errorf("failed to read input Score file: %s: %w", arg, err)
 			} else if err = yaml.Unmarshal(raw, &rawWorkload); err != nil {
-				return fmt.Errorf("failed to decode input score file: %s: %w", arg, err)
+				return fmt.Errorf("failed to decode input Score file: %s: %w", arg, err)
 			}
 
 			// apply overrides
@@ -102,9 +102,9 @@ var generateCmd = &cobra.Command{
 
 			var workload scoretypes.Workload
 			if err = scoreschema.Validate(rawWorkload); err != nil {
-				return fmt.Errorf("invalid score file: %s: %w", arg, err)
+				return fmt.Errorf("invalid Score file: %s: %w", arg, err)
 			} else if err = scoreloader.MapSpec(&workload, rawWorkload); err != nil {
-				return fmt.Errorf("failed to decode input score file: %s: %w", arg, err)
+				return fmt.Errorf("failed to decode input Score file: %s: %w", arg, err)
 			}
 
 			// Apply image override
@@ -121,13 +121,13 @@ var generateCmd = &cobra.Command{
 			}
 
 			if currentState, err = currentState.WithWorkload(&workload, &arg, state.WorkloadExtras{}); err != nil {
-				return fmt.Errorf("failed to add score file to project: %s: %w", arg, err)
+				return fmt.Errorf("failed to add Score file to project: %s: %w", arg, err)
 			}
-			slog.Info("Added score file to project", "file", arg)
+			slog.Info("Added Score file to project", "file", arg)
 		}
 
 		if len(currentState.Workloads) == 0 {
-			return fmt.Errorf("project is empty, please add a score file")
+			return fmt.Errorf("project is empty, please add a Score file")
 		}
 
 		if currentState, err = currentState.WithPrimedResources(); err != nil {

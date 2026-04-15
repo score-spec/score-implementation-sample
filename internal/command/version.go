@@ -27,9 +27,9 @@ import (
 )
 
 const (
-	versionCmdFileNoLogo        = "no-logo"
+	versionCmdFileNoLogo         = "no-logo"
 	versionCmdFileNoUpdatesCheck = "no-updates-check"
-	logo                        = `
+	logo                         = `
                    ...    .............           
                .......   .............            
            .........     ............             
@@ -49,7 +49,7 @@ const (
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Show the version for score-implementation-sample and new version to update if available.",
+	Short: "Show the version for " + ScoreImplementationName + " and new version to update if available.",
 	Args:  cobra.NoArgs,
 	CompletionOptions: cobra.CompletionOptions{
 		HiddenDefaultCmd: true,
@@ -62,11 +62,11 @@ var versionCmd = &cobra.Command{
 			fmt.Println(logo)
 		}
 
-		fmt.Println("score-implementation-sample", version.BuildVersionString())
+		fmt.Println(ScoreImplementationName, version.BuildVersionString())
 
 		if noUpdateCheck, _ := cmd.Flags().GetBool(versionCmdFileNoUpdatesCheck); !noUpdateCheck {
 			if newer, err := checkForNewerVersion(version.Version); err == nil && newer != "" {
-				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "\nA newer version is available: %s\nUpdate at: https://github.com/score-spec/score-implementation-sample/releases/tag/%s\n", newer, newer)
+				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "\nA newer version is available: %s\nUpdate at: https://github.com/score-spec/%s/releases/tag/%s\n", newer, ScoreImplementationName, newer)
 			}
 		}
 
@@ -79,7 +79,7 @@ var versionCmd = &cobra.Command{
 // or if the current version cannot be parsed.
 func checkForNewerVersion(currentVersion string) (string, error) {
 	client := &http.Client{Timeout: 5 * time.Second}
-	resp, err := client.Get("https://api.github.com/repos/score-spec/score-implementation-sample/releases/latest")
+	resp, err := client.Get("https://api.github.com/repos/score-spec/" + ScoreImplementationName + "/releases/latest")
 	if err != nil {
 		return "", err
 	}
