@@ -28,22 +28,22 @@ import (
 
 const (
 	versionCmdFileNoLogo        = "no-logo"
-	versionCmdFileNoUpdateCheck = "no-update-check"
+	versionCmdFileNoUpdatesCheck = "no-updates-check"
 	logo                        = `
-                   ...    ..-----------           
-               .......   .....--------            
-           .........     ......------             
+                   ...    .............           
+               .......   .............            
+           .........     ............             
        .........        .....                     
       .......           ....   ..                 
-       ..........      .....   .....-             
-           ........   ......   .......---         
-              .....   .....       ......----      
-                      ....          .....---      
+       ..........      .....   ......             
+           ........   ......   ..........         
+              .....   .....       ..........      
+                      ....          ........      
               ...........       .........         
-           ..............    ........-            
+           ..............    .........            
          ................   ......                
          ...............    ..                    
-          -...........
+          ............
 	`
 )
 
@@ -58,12 +58,13 @@ var versionCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cmd.SilenceUsage = true
 
-		if v, _ := cmd.Flags().GetBool(versionCmdFileNoLogo); !v {
+		if noLogo, _ := cmd.Flags().GetBool(versionCmdFileNoLogo); !noLogo {
 			fmt.Println(logo)
 		}
+
 		fmt.Println("score-implementation-sample", version.BuildVersionString())
 
-		if noUpdateCheck, _ := cmd.Flags().GetBool(versionCmdFileNoUpdateCheck); !noUpdateCheck {
+		if noUpdateCheck, _ := cmd.Flags().GetBool(versionCmdFileNoUpdatesCheck); !noUpdateCheck {
 			if newer, err := checkForNewerVersion(version.Version); err == nil && newer != "" {
 				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "\nA newer version is available: %s\nUpdate at: https://github.com/score-spec/score-implementation-sample/releases/tag/%s\n", newer, newer)
 			}
@@ -133,6 +134,6 @@ func parseSemver(v string) [3]int {
 
 func init() {
 	versionCmd.Flags().Bool(versionCmdFileNoLogo, false, "Do not show the Score logo")
-	versionCmd.Flags().Bool(versionCmdFileNoUpdateCheck, false, "Do not check for a new version")
+	versionCmd.Flags().Bool(versionCmdFileNoUpdatesCheck, false, "Do not check for a new version")
 	rootCmd.AddCommand(versionCmd)
 }
