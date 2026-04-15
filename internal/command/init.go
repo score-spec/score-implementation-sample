@@ -35,7 +35,7 @@ const (
 
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialise the local state directory and sample score file",
+	Short: "Initialize the local state directory and sample Score file",
 	Args:  cobra.NoArgs,
 	CompletionOptions: cobra.CompletionOptions{
 		HiddenDefaultCmd: true,
@@ -104,7 +104,7 @@ var initCmd = &cobra.Command{
 }
 
 func init() {
-	initCmd.Flags().StringP(initCmdFileFlag, "f", "score.yaml", "The score file to initialize")
-	initCmd.Flags().Bool(initCmdFileNoSampleFlag, false, "Disable generation of the sample score file")
+	initCmd.Flags().StringP(initCmdFileFlag, "f", "score.yaml", "The Score file to initialize")
+	initCmd.Flags().Bool(initCmdFileNoSampleFlag, false, "Disable generation of the sample Score file")
 	rootCmd.AddCommand(initCmd)
 }

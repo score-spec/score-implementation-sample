@@ -53,7 +53,7 @@ func TestGenerateWithoutScoreFiles(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "", stdout)
 	stdout, _, err = executeAndResetCommand(context.Background(), rootCmd, []string{"generate"})
-	assert.EqualError(t, err, "project is empty, please add a score file")
+	assert.EqualError(t, err, "project is empty, please add a Score file")
 	assert.Equal(t, "", stdout)
 }
 
@@ -66,7 +66,7 @@ func TestInitAndGenerateWithBadFile(t *testing.T) {
 	assert.NoError(t, os.WriteFile(filepath.Join(td, "thing"), []byte(`"blah"`), 0644))
 
 	stdout, _, err = executeAndResetCommand(context.Background(), rootCmd, []string{"generate", "thing"})
-	assert.EqualError(t, err, "failed to decode input score file: thing: yaml: unmarshal errors:\n  line 1: cannot unmarshal !!str `blah` into map[string]interface {}")
+	assert.EqualError(t, err, "failed to decode input Score file: thing: yaml: unmarshal errors:\n  line 1: cannot unmarshal !!str `blah` into map[string]interface {}")
 	assert.Equal(t, "", stdout)
 }
 
@@ -79,7 +79,7 @@ func TestInitAndGenerateWithBadScore(t *testing.T) {
 	assert.NoError(t, os.WriteFile(filepath.Join(td, "thing"), []byte(`{}`), 0644))
 
 	stdout, _, err = executeAndResetCommand(context.Background(), rootCmd, []string{"generate", "thing"})
-	assert.EqualError(t, err, "invalid score file: thing: jsonschema: '' does not validate with https://score.dev/schemas/score#/required: missing properties: 'apiVersion', 'metadata', 'containers'")
+	assert.EqualError(t, err, "invalid Score file: thing: jsonschema: '' does not validate with https://score.dev/schemas/score#/required: missing properties: 'apiVersion', 'metadata', 'containers'")
 	assert.Equal(t, "", stdout)
 }
 
