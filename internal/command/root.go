@@ -38,6 +38,7 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.Version = version.BuildVersionString()
+	rootCmd.SetVersionTemplate(`{{with .Name}}{{printf "%s " .}}{{end}}{{printf "%s\n" .Version}}`)
 }
 
 func Execute() error {
