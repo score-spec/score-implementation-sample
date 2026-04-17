@@ -41,12 +41,12 @@ func semverToI(x string) (int, error) {
 		return 0, fmt.Errorf("invalid version: %s", x)
 	}
 	major, _ := strconv.Atoi(cpm[1])
-	minor, patch := 999, 999
-	if len(cpm) > 2 {
+	minor, patch := 0, 0
+	if len(cpm) > 2 && cpm[2] != "" {
 		minor, _ = strconv.Atoi(cpm[2])
-		if len(cpm) > 3 {
-			patch, _ = strconv.Atoi(cpm[3])
-		}
+	}
+	if len(cpm) > 3 && cpm[3] != "" {
+		patch, _ = strconv.Atoi(cpm[3])
 	}
 	return (major*1_000+minor)*1_000 + patch, nil
 }
@@ -72,6 +72,8 @@ func AssertVersion(constraint string, current string) error {
 			match = currentI >= compareI
 		case "=":
 			match = currentI == compareI
+		default:
+			return fmt.Errorf("invalid constraint operator in '%s'", constraint)
 		}
 		if !match {
 			return fmt.Errorf("current version %s does not match requested constraint %s", current, constraint)
