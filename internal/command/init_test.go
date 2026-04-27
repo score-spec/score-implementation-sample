@@ -51,7 +51,12 @@ func TestInitNominal(t *testing.T) {
 	if assert.True(t, ok) {
 		assert.Equal(t, state.DefaultRelativeStateDirectory, sd.Path)
 		assert.Len(t, sd.State.Workloads, 1)
-		assert.Equal(t, map[framework.ResourceUid]framework.ScoreResourceState[state.ResourceExtras]{}, sd.State.Resources)
+		assert.Contains(t, sd.State.Workloads, "hello-world")
+		// Resources use randomized names in output, so check state instead.
+		assert.Len(t, sd.State.Resources, 3)
+		assert.Contains(t, sd.State.Resources, framework.ResourceUid("postgres.default#hello-world.db"))
+		assert.Contains(t, sd.State.Resources, framework.ResourceUid("dns.default#hello-world.dns"))
+		assert.Contains(t, sd.State.Resources, framework.ResourceUid("route.default#hello-world.route"))
 		assert.Equal(t, map[string]interface{}{}, sd.State.SharedState)
 	}
 }
