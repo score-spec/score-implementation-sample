@@ -2,7 +2,7 @@ module github.com/score-spec/score-implementation-sample
 
 go 1.26
 
-toolchain go1.26.1
+toolchain go1.26.4
 
 require (
 	dario.cat/mergo v1.0.2
