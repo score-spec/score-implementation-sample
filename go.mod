@@ -6,7 +6,7 @@ toolchain go1.26.5
 
 require (
 	dario.cat/mergo v1.0.2
-	github.com/score-spec/score-go v1.19.0
+	github.com/score-spec/score-go v1.20.0
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
 	github.com/stretchr/testify v1.11.1
