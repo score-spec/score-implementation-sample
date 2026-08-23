@@ -1,4 +1,4 @@
-FROM golang:1.27-alpine@sha256:4c9fe60190a2a3350ddc51de80d0224b8a6698d12bdfc999fee45ea9d6c46dbc AS builder
+FROM dhi.io/golang:1.27-alpine-dev AS builder
 
 ARG VERSION
 ARG GIT_COMMIT
@@ -20,8 +20,8 @@ RUN CGO_ENABLED=0 GOOS=linux \
         -X github.com/score-spec/score-implementation-sample/internal/version.BuildDate=${BUILD_DATE}" \
     -o /usr/local/bin/score-implementation-sample ./cmd/score-implementation-sample
 
-# We can use gcr.io/distroless/static since we don't rely on any linux libs or state, but we need ca-certificates to connect to https/oci with the init command.
-FROM gcr.io/distroless/static:530158861eebdbbf149f7e7e67bfe45eb433a35c@sha256:5c7e2b465ac6a2a4e5f4f7f722ce43b147dabe87cb21ac6c4007ae5178a1fa58
+# We can use static since we don't rely on any linux libs or state, but we need ca-certificates to connect to https/oci with the init command.
+FROM dhi.io/static:20260611-alpine3.24@sha256:93568eb7c673afb3ad79b15cca341469d3e02cf859caae1049aa22fe7fbce90a
 
 # Set the current working directory inside the container.
 WORKDIR /score-implementation-sample

@@ -29,9 +29,11 @@ test-app: build
 build-container:
 	docker build -t score-implementation-sample:local .
 
+# The image runs as the nonroot user of the hardened base image, which does not own the
+# mounted directory, so run the commands that write to it as the current user instead.
 test-container: build-container
 	docker run --rm score-implementation-sample:local --version
-	docker run --rm -v .:/score-implementation-sample score-implementation-sample:local init
+	docker run --rm --user $(shell id -u):$(shell id -g) -v .:/score-implementation-sample score-implementation-sample:local init
 	cat score.yaml
-	docker run --rm -v .:/score-implementation-sample score-implementation-sample:local generate score.yaml
+	docker run --rm --user $(shell id -u):$(shell id -g) -v .:/score-implementation-sample score-implementation-sample:local generate score.yaml
 	cat manifests.yaml
