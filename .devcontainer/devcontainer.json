@@ -1,0 +1,19 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "Go",
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.24-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/go:1": {},
+		"ghcr.io/dhoeric/features/google-cloud-cli:1": {}
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "go run cmd/score-implementation-sample/main.go",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+}
